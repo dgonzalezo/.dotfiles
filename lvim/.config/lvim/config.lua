@@ -155,7 +155,7 @@ lvim.lang.ruby.host = "127.0.0.1"
 lvim.lang.ruby.port = "1234"
 
 local dap_install = require("dap-install")
-dap_install.config("ruby_vsc_dbg", {
+dap_install.config("ruby_vsc", {
 	-- adapters = {
 	-- 	args = { "--skip_wait_for_start" },
 	-- },
