@@ -1,0 +1,21 @@
+#ssh github config
+https://gist.github.com/jexchan/2351996
+
+#apps list
+lazygit
+lunarvim
+ranger
+bat
+lsd
+bspwm
+sxhkd
+polybar
+rofi
+picom
+green-clip
+feh
+tmux
+p10k
+
+#zsh config
+https://dev.to/abdfnx/oh-my-zsh-powerlevel10k-cool-terminal-1no0
