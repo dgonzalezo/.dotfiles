@@ -16,7 +16,7 @@ alt + shift + d
 alt + shift + c
   systemctl suspend
 alt + c
-	rofi -modi "clipboard:greenclip print" -theme ~/.config/sxhkd/rofithemes/slate.rasi -show clipboard -run-command '{cmd}'
+	rofi -modi "clipboard:~/.local/bin/greenclip print" -theme ~/.config/sxhkd/rofithemes/slate.rasi -show clipboard -run-command '{cmd}'
 # make sxhkd reload its configuration files:
 alt + Escape
 	pkill -USR1 -x sxhkd
