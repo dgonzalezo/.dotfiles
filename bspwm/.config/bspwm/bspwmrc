@@ -18,6 +18,8 @@ bspc config gapless_monocle      true
 
 bspc config click_to_focus          true
 bspc config focus_follows_pointer   true
+bspc config pointer_modifier mod1
+bspc config pointer_action1 move
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Chromium desktop='^2'
