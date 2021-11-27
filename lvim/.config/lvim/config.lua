@@ -13,8 +13,6 @@ lvim.log.level = "warn"
 lvim.format_on_save = false
 lvim.colorscheme = "onedarker"
 
-vim.api.nvim_command("set relativenumber")
-vim.api.nvim_command("set guicursor=n:blinkon0")
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
@@ -22,24 +20,8 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.builtin.which_key.mappings["r"] = { ":RnvimrToggle<CR>", "Ranger" }
 lvim.builtin.which_key.mappings["nn"] = { ":!tmux neww ~/.local/bin/cheat.sh<CR>", "Cheat" }
 lvim.builtin.which_key.mappings["htf"] = { ":!prettier --write %<CR><CR><CR>", "html format" }
+lvim.builtin.which_key.mappings["o"] = { "<cmd>SymbolsOutline<cr>", "Outline" }
 lvim.lsp.diagnostics.virtual_text = false
--- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = ""
--- edit a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
-
--- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
--- lvim.builtin.telescope.on_config_done = function()
---   local actions = require "telescope.actions"
---   -- for input mode
---   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
---   lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
---   lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
---   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
---   -- for normal mode
---   lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
---   lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
--- end
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
@@ -65,6 +47,7 @@ lvim.builtin.dap.active = true
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
+lvim.lsp.automatic_servers_installation = true
 
 -- generic LSP settings
 -- you can set a custom on_attach function that will be used for all the language servers
@@ -93,10 +76,16 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- end
 
 -- set a formatter if you want to override the default lsp one (if it exists)
-lvim.lsp.automatic_servers_installation = true
-require("lvim.lsp.manager").setup("sumneko_lua")
-require("lvim.lsp.manager").setup("dockerls")
+vim.list_extend(lvim.lsp.override, { "pyright" })
+vim.list_extend(lvim.lsp.override, { "emmet_ls" })
+vim.api.nvim_command("set relativenumber")
+vim.api.nvim_command("set guicursor=n:blinkon0")
 
+vim.cmd("let g:user_emmet_leader_key='<C-Z>'")
+
+require("lvim.lsp.manager").setup("sumneko_lua")
+
+-- formatters
 local formatters = require "lvim.lsp.null-ls.formatters"
 
 formatters.setup {
@@ -113,6 +102,7 @@ formatters.setup {
   { exe = "clang_format", filetypes = {"c", "cpp"}}
 }
 
+-- linters
 local linters = require "lvim.lsp.null-ls.linters"
 
 linters.setup {
@@ -122,34 +112,6 @@ linters.setup {
     filetypes = { "typescript", "javascript", "vue", "html" },
   }
 }
--- lvim.lang.python.formatters = {
--- 	{
--- 		exe = "black",
--- 	},
--- }
--- set an additional linter
--- lvim.lang.python.linters = {
--- 	{
--- 		exe = "flake8",
--- 	},
--- }
-
--- lvim.lang.lua.formatters = { { exe = "stylua" } }
-
--- lvim.lang.c.formatters = { { exe = "clang_format" } }
--- lvim.lang.cpp.formatters = lvim.lang.c.formatters
-
--- lvim.lang.javascript.formatters = { { exe = "prettier" } }
--- lvim.lang.javascript.linters = { { exe = "eslint" } }
-
--- lvim.lang.typescript.formatters = { { exe = "prettier" } }
--- lvim.lang.typescript.linters = { { exe = "eslint" } }
-
--- lvim.lang.vue.formatters = { { exe = "prettier" } }
--- lvim.lang.vue.linters = { { exe = "eslint" } }
-
--- lvim.lang.html.formatters = { { exe = "prettier" } }
--- lvim.lang.html.linters = { { exe = "eslint" } }
 
 lvim.lang.ruby.host = "127.0.0.1"
 lvim.lang.ruby.port = "1234"
@@ -174,6 +136,7 @@ dap_install.config("ruby_vsc", {
 		},
 	},
 })
+
 -- Additional Plugins
 lvim.plugins = {
 	{ "folke/tokyonight.nvim" },
@@ -206,6 +169,38 @@ lvim.plugins = {
 	{ "theHamsta/nvim-dap-virtual-text" },
 	{ "rcarriga/nvim-dap-ui" },
 	{ "kevinhwang91/rnvimr" },
+  {
+    "mattn/emmet-vim",
+    ft = { "html", "css", "eruby", "javascript" },
+  },
+  {
+			"simrat39/symbols-outline.nvim",
+			cmd = "SymbolsOutline",
+  },
+  {
+			"norcalli/nvim-colorizer.lua",
+			config = function()
+				require("colorizer").setup({ "*" }, {
+					RGB = true, -- #RGB hex codes
+					RRGGBB = true, -- #RRGGBB hex codes
+					RRGGBBAA = true, -- #RRGGBBAA hex codes
+					rgb_fn = true, -- CSS rgb() and rgba() functions
+					hsl_fn = true, -- CSS hsl() and hsla() functions
+					css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+					css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+				})
+			end,
+		},
+  {
+			"phaazon/hop.nvim",
+			as = "hop",
+      keys = {"s"},
+			config = function()
+				-- you can configure Hop the way you like here; see :h hop-config
+				require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+				vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", {})
+			end,
+		},
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
