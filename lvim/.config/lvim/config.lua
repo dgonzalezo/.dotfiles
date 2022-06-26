@@ -21,6 +21,7 @@ lvim.builtin.which_key.mappings["r"] = { ":RnvimrToggle<CR>", "Ranger" }
 lvim.builtin.which_key.mappings["nn"] = { ":!tmux neww ~/.local/bin/cheat.sh<CR>", "Cheat" }
 lvim.builtin.which_key.mappings["htf"] = { ":!prettier --write %<CR><CR><CR>", "html format" }
 lvim.builtin.which_key.mappings["o"] = { "<cmd>SymbolsOutline<cr>", "Outline" }
+lvim.builtin.which_key.mappings["lR"] = { ":LspRestart<cr>", "Lsp restart" }
 lvim.lsp.diagnostics.virtual_text = false
 
 -- Use which-key to add extra bindings with the leader-key prefix
@@ -93,7 +94,7 @@ formatters.setup {
   {
     exe = "prettier",
     args = { "--print-width", "100" },
-    filetypes = { "typescript", "javascript", "vue", "html" },
+    filetypes = { "typescript", "javascript", "vue", "html", "typescriptreact" },
   },
   -- {
     -- exe = "stylua",
@@ -109,7 +110,7 @@ linters.setup {
   { exe = "flake8" },
   {
     exe = "eslint",
-    filetypes = { "typescript", "javascript", "vue", "html" },
+    filetypes = { "typescript", "javascript", "vue", "html", "typescriptreact" },
   }
 }
 
