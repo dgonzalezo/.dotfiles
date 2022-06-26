@@ -109,6 +109,7 @@ bindkey '^ ' autosuggest-accept
 alias ide="bash ~/ide.sh"
 alias up="~/Documents/Trabajo/OneEasyStopNew/up.sh"
 alias server="~/Documents/Trabajo/OneEasyStopNew/server.sh"
+alias cloud_db="/home/elian/Documents/Trabajo/Hubster/scripts/cloud_db"
 alias cat='/bin/bat'
 alias catn='/bin/cat'
 alias catnl='/bin/bat --paging=never'
@@ -125,11 +126,20 @@ alias ls='lsd --group-dirs=first'
 # export HIPS_DB_PASSWORD=1007
 export PATH=$PATH:/var/lib/flatpak/app
 export PATH=$PATH:/home/elian/.local/bin
+
+#ruby with rvm
+export PATH=$PATH:/home/elian/.rvm/gems/ruby-2.7.1/bin:/home/elian/.rvm/gems/ruby-2.7.1@global/bin:/usr/share/rvm/rubies/ruby-2.7.1/bin:/usr/share/rvm/bin
+export GEM_PATH=/home/elian/.rvm/gems/ruby-2.7.1:/home/elian/.rvm/gems/ruby-2.7.1@global
+export GEM_HOME=/home/elian/.rvm/gems/ruby-2.7.1
+
+#node and npm
+# export NPM_CONFIG_PREFIX=~/.npm-global
 # export PATH=$PATH:Documentos/2020-2/Ingesoft2/hips-project/liquibase/
 # export LIQUIBASE_HOME=Documentos/2020-2/Ingesoft2/hips-project/liquibase/
 # alias hips=Documentos/2020-2/Ingesoft2/hips-project/
 # alias 21=~/Documentos/2021-1/
 alias v=lvim
+alias k="/snap/bin/kubectl"
 export JWT_SECRET=secreto
 #source $HOME/.cargo/env
 # alias exercism=~/snap/exercism/5/exercism
@@ -137,7 +147,7 @@ fpath=(~/.zsh.d/ $fpath)
 export EDITOR=lvim
 # export SONAR_TOKEN=0905eecc18d2e9ad340cb9803fd5db280ac881e9
 #bindkey -v
-setxkbmap -layout us -variant dvorak
+# setxkbmap -layout us -variant dvorak
 # setxkbmap us
 fpath=(~/.zsh.d/ $fpath)
 autoload -U history-search-end
@@ -150,3 +160,8 @@ bindkey "^[[B" history-beginning-search-forward-end
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 source /etc/zsh/zprofile
+# export _JAVA_AWT_WM_NONREPARENTING=1 #java application fix GUI problems
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
